@@ -1,0 +1,48 @@
+@model IEnumerable<wt_lab4_4mvc_besman.Models.BankAccount>
+
+@{
+    ViewData["Title"] = "Список счетов";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold">Банковские счета</h1>
+            <p class="text-muted mb-0">Всего счетов: @Model.Count()</p>
+        </div>
+        <a asp-action="Create" class="btn btn-success rounded-3 shadow-sm">
+            Открыть новый счёт
+        </a>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm rounded-4 border-0">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-secondary">ID: @item.Id</span>
+                            @if (item.IsActive)
+                            {
+                                <span class="badge bg-success">Активен</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Заблокирован</span>
+                            }
+                        </div>
+                        <h5 class="card-title fw-bold text-dark">@item.Owner</h5>
+                        <p class="text-muted small mb-2">Счёт: @item.AccountNumber</p>
+                        <p class="fs-4 fw-bold text-primary my-2">@item.Balance.ToString("F2") @item.Currency</p>
+                        
+                        <div class="mt-auto pt-3 d-flex gap-2">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm rounded-3 w-100">Подробнее</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm rounded-3 w-100">Изменить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,37 @@
+@model wt_lab4_4mvc_besman.Models.BankAccount
+
+@{
+    ViewData["Title"] = "Информация о счёте";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm rounded-4 border-0 p-4">
+                <h2 class="mb-4 fw-bold text-center">Счёт № @Model.Id</h2>
+                <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Владелец:</span>
+                        <strong>@Model.Owner</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Номер счёта:</span>
+                        <strong>@Model.AccountNumber</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Баланс:</span>
+                        <strong class="text-primary">@Model.Balance.ToString("F2") @Model.Currency</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Статус:</span>
+                        <strong>@(Model.IsActive ? "Активен" : "Заблокирован")</strong>
+                    </li>
+                </ul>
+                <div class="d-flex gap-2">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning rounded-3 w-100">Редактировать</a>
+                    <a asp-action="Index" class="btn btn-secondary rounded-3 w-100">Назад к списку</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
